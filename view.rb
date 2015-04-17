@@ -13,8 +13,9 @@ class View
       puts "As it turns out, #{a} is the correct answer! You clearly cheated."
     end
 
-    def display_incorrect
+    def display_incorrect(a)
       puts "WRONG! We can add this to the world's longest list, entitled ''Instances Wherein You Have Failed''"
+      puts "The correct answer is #{a}, you idiot!"
     end
 
     def display_banner
@@ -29,14 +30,14 @@ class View
     def load_screen
       display_banner
       puts "Please Wait \n"
-      3.times { print ".  "; sleep(1) }
+      3.times { print ".  "; sleep(1.5) }
       puts
     end
 
     def display_deck_options
       puts "Type '1' for easy deck"
       puts "Type '2' for medium deck"
-      puts "Type '3' for hard deck"
+      puts "Type '3' for, emperically, the best deck"
       puts "Type 'Switch' to change difficulty"
     end
   end
