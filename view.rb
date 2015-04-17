@@ -32,5 +32,11 @@ class View
       3.times { print ".  "; sleep(1) }
       puts
     end
+
+    def display_deck_options
+      puts "Type '1' for easy deck"
+      puts "Type '2' for medium deck"
+      puts "Type '3' for hard deck"
+    end
   end
 end

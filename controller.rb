@@ -1,6 +1,7 @@
 require_relative 'model'
 require_relative 'view'
 require 'pry'
+require 'byebug'
 
 module Parser
 
@@ -24,11 +25,16 @@ end
 
 class Game
   include Parser
-  attr_accessor :my_cards, :my_deck
+  attr_accessor :my_cards, :my_decks, :my_deck
 
-  def initialize(filepath)
-    @my_cards = convert_to_object(load_text(filepath))
-    @my_deck = Deck.new(my_cards)
+  def initialize(filepaths)
+    deck_names = ["easy","medium","hard"]
+    @my_deck = nil
+    @my_decks = filepaths.each_with_index.map do |filepath, index|
+      @my_cards = convert_to_object(load_text(filepath))
+      Deck.new(deck_names[index], my_cards)
+    end
+    # byebug
     runner
   end
 
@@ -58,9 +64,18 @@ class Game
     answer == input ? View.display_correct(answer) : View.display_incorrect
   end
 
+  def select_deck
+    input = 0
+    input = gets.chomp.to_i until input != 0
+    my_decks[input - 1] != nil ? self.my_deck = my_decks[input - 1] : select_deck
+    byebug
+  end
+
   def runner
     system "clear"
     View.display_welcome
+    View.display_deck_options
+    select_deck
     input = ""
     until input == "quit"
       View.display_options
@@ -73,5 +88,5 @@ class Game
     end
   end
 end
-game = Game.new('flashcard_samples.txt')
+game = Game.new(['flashcard_samples.txt'])
 

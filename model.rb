@@ -1,7 +1,8 @@
 class Deck
   attr_reader :all_cards
 
-  def initialize(all_cards)
+  def initialize(name, all_cards)
+    @name = name
     @all_cards = all_cards
   end
 end
