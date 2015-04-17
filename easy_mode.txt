@@ -1,0 +1,23 @@
+What is the highest level in the object model?
+BasicObject
+
+Which core object includes the Kernel module?
+Object
+
+Does 'String' include the 'Enumerable' module?
+No
+
+What is the superclass of Fixnum?
+Integer
+
+What is the superclass of Integer?
+Numeric
+
+What value does a method return if it does not contain an expression?
+nil
+
+Are constants public or private?
+Public
+
+Who was the chief designer of the Ruby Programming Language?
+Yukihiro Matsumoto
