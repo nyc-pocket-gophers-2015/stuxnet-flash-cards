@@ -18,6 +18,7 @@ module Parser
      #this is where we are trying to make the hash
      # newarray.each_with_index{|element,idx|]]
      final_array
+
   end
 end
 
