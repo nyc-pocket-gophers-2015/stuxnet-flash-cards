@@ -83,14 +83,14 @@ class Game
       when "switch"
         deck_method
       when my_card.answer
-        View.display_correct
+        View.display_correct(my_card.answer)
       else
-        View.display_incorrect
+        View.display_incorrect(my_card.answer)
       end
       View.load_screen
       system("clear")
     end
   end
 end
-game = Game.new(['easy_mode.txt','flashcard_samples.txt'])
+game = Game.new(['easy_mode.txt','flashcard_samples.txt','joke_deck.txt'])
 
