@@ -3,20 +3,20 @@
 require_relative 'view'
 require 'pry'
 
-# class Card
-#   attr_accessor :question, :answer
-#   def initialize
-#     @question = "Hello?"
-#     @answer = "meow"
-#   end
-# end
+class Card
+  attr_accessor :question, :answer
+  def initialize
+    @question = "Hello?"
+    @answer = "meow"
+  end
+end
 
-# class Deck
-#   attr_reader :cards
-#   def initialize(cards)
-#     @cards = cards
-#   end
-# end
+class Deck
+  attr_reader :cards
+  def initialize(cards)
+    @cards = cards
+  end
+end
 
 
 class Game
