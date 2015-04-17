@@ -1,36 +1,45 @@
-# require_relative 'card_model'
-# require_relative 'deck_model'
+require_relative 'model'
 require_relative 'view'
 require 'pry'
 
-# class Card
-#   attr_accessor :question, :answer
-#   def initialize
-#     @question = "Hello?"
-#     @answer = "meow"
-#   end
-# end
+module Parser
 
-# class Deck
-#   attr_reader :cards
-#   def initialize(cards)
-#     @cards = cards
-#   end
-# end
+  def load_text(filename)
+    newarray = []
+    f = File.open(filename, "r")
+    f.each_line { |line|
+      newarray << line.chomp
+    }
+    f.close
+     newarray.select!{|line| line != ""}
+     # p newarray
+     final_array = []
+     (newarray.length/2).times { |ind| final_array << {:question => newarray[ind*2],:answer => newarray[(ind*2)+1]} }
+     #this is where we are trying to make the hash
+     # newarray.each_with_index{|element,idx|]]
+     final_array
+  end
+end
 
 
 class Game
+  include Parser
   attr_accessor :my_cards, :my_deck
 
   def initialize(filepath)
-    @my_cards = [Card.new]
+    @my_cards = convert_to_object(load_text(filepath))
     @my_deck = Deck.new(my_cards)
     runner
   end
 
+  def convert_to_object(array_of_hashes)
+    array_of_hashes.map { |hash| Card.new(hash) }
+  end
+
+
   def select_card
-    random = rand(0...my_deck.cards.length)
-    my_deck.cards[random]
+    random = rand(0...my_deck.all_cards.length)
+    my_deck.all_cards[random]
   end
 
   def get_question(obj)
@@ -64,6 +73,5 @@ class Game
     end
   end
 end
-# binding.pry
-game = Game.new("shitogo")
+game = Game.new('flashcard_samples.txt')
 
