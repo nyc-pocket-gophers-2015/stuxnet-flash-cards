@@ -37,6 +37,7 @@ class View
       puts "Type '1' for easy deck"
       puts "Type '2' for medium deck"
       puts "Type '3' for hard deck"
+      puts "Type 'Switch' to change difficulty"
     end
   end
 end
