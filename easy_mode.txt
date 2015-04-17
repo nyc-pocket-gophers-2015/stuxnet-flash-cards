@@ -1,4 +1,4 @@
-What is the highest level in the object model?
+ What is the highest level in the object model?
 BasicObject
 
 Which core object includes the Kernel module?

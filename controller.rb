@@ -49,12 +49,15 @@ class Game
   end
 
   def get_input
-    gets.chomp.downcase
+    gets.chomp.upcase
   end
 
-  def check_answer(answer,input)
-    answer == input ? View.display_correct(answer) : View.display_incorrect
-  end
+  # def check_answer(answer,input)
+  #   if answer == input ?
+  #     View.display_correct(answer)
+  #   else
+  #     View.display_incorrect
+  # end
 
   def select_deck
     input = 0
@@ -72,20 +75,21 @@ class Game
     system "clear"
     deck_method
     input = ""
-    until input == "quit"
+    loop do
       View.display_options
       my_card = select_card
       View.display_question(my_card.question)
       input = get_input
       case input
-      when "quit"
+      when "QUIT"
         break
-      when "switch"
+      when "SWITCH"
         deck_method
       when my_card.answer
         View.display_correct(my_card.answer)
       else
-        View.display_incorrect(my_card.answer)
+        View.display_incorrect(my_card)
+        my_card.counter += 1
       end
       View.load_screen
       system("clear")

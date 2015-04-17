@@ -13,9 +13,10 @@ class View
       puts "As it turns out, #{a} is the correct answer! You clearly cheated."
     end
 
-    def display_incorrect(a)
+    def display_incorrect(card)
       puts "WRONG! We can add this to the world's longest list, entitled ''Instances Wherein You Have Failed''"
-      puts "The correct answer is #{a}, you idiot!"
+      puts "The correct answer is #{card.answer}, you idiot!"
+      puts "You've gotten this question wrong #{card.counter + 1} time(s) already !!"
     end
 
     def display_banner

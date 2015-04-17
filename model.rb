@@ -10,9 +10,12 @@ end
 class Card
   attr_reader :question, :answer
 
+  attr_accessor :counter
+
   def initialize(args = {})
     @question = args[:question]
-    @answer = args[:answer]
+    @answer = args[:answer].upcase
+    @counter = 0
   end
 end
 
