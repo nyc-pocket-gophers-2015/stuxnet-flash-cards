@@ -13,11 +13,8 @@ module Parser
     }
     f.close
      newarray.select!{|line| line != ""}
-     # p newarray
      final_array = []
      (newarray.length/2).times { |ind| final_array << {:question => newarray[ind*2],:answer => newarray[(ind*2)+1]} }
-     #this is where we are trying to make the hash
-     # newarray.each_with_index{|element,idx|]]
      final_array
   end
 end
@@ -34,7 +31,6 @@ class Game
       @my_cards = convert_to_object(load_text(filepath))
       Deck.new(deck_names[index], my_cards)
     end
-    # byebug
     runner
   end
 
@@ -52,10 +48,6 @@ class Game
     View.display_question(obj.question)
   end
 
-  def get_answer(obj)
-    obj.answer
-  end
-
   def get_input
     gets.chomp.downcase
   end
@@ -68,25 +60,37 @@ class Game
     input = 0
     input = gets.chomp.to_i until input != 0
     my_decks[input - 1] != nil ? self.my_deck = my_decks[input - 1] : select_deck
-    byebug
+  end
+
+  def deck_method
+    View.display_welcome
+    View.display_deck_options
+    select_deck
   end
 
   def runner
     system "clear"
-    View.display_welcome
-    View.display_deck_options
-    select_deck
+    deck_method
     input = ""
     until input == "quit"
       View.display_options
       my_card = select_card
       View.display_question(my_card.question)
       input = get_input
-      input == "quit" ? break : check_answer(my_card.answer, input)
+      case input
+      when "quit"
+        break
+      when "switch"
+        deck_method
+      when my_card.answer
+        View.display_correct
+      else
+        View.display_incorrect
+      end
       View.load_screen
       system("clear")
     end
   end
 end
-game = Game.new(['flashcard_samples.txt'])
+game = Game.new(['easy_mode.txt','flashcard_samples.txt'])
 
