@@ -1,9 +1,10 @@
 class Deck
   attr_reader :all_cards
 
-  def initialize(name, all_cards)
-    @name = name
-    @all_cards = all_cards
+  def initialize(args = {})
+    # use hashes for inits
+    @name = args[:name]
+    @all_cards = args[:all_cards]
   end
 end
 

@@ -1,7 +1,7 @@
 require_relative 'model'
 require_relative 'view'
 require 'pry'
-require 'byebug'
+require 'byebug' # why both?
 
 module Parser
 
@@ -21,14 +21,14 @@ end
 
 
 class Game
-  include Parser
+  include Parser # nice
   attr_accessor :my_cards, :my_decks, :my_deck
 
   def initialize(filepaths)
     deck_names = ["easy","medium","hard"]
     @my_deck = nil
     @my_decks = filepaths.each_with_index.map do |filepath, index|
-      @my_cards = convert_to_object(load_text(filepath))
+      @my_cards = convert_to_object(load_text(filepath)) # we're rereading the file every time? why?
       Deck.new(deck_names[index], my_cards)
     end
     runner
@@ -39,7 +39,7 @@ class Game
   end
 
 
-  def select_card
+  def select_card # should probably be a deck model method 
     random = rand(0...my_deck.all_cards.length)
     my_deck.all_cards[random]
   end
@@ -48,21 +48,17 @@ class Game
     View.display_question(obj.question)
   end
 
-  def get_input
+  def get_input # View
     gets.chomp.upcase
   end
 
-  # def check_answer(answer,input)
-  #   if answer == input ?
-  #     View.display_correct(answer)
-  #   else
-  #     View.display_incorrect
-  # end
-
+# don't commit unused code
   def select_deck
     input = 0
-    input = gets.chomp.to_i until input != 0
-    my_decks[input - 1] != nil ? self.my_deck = my_decks[input - 1] : select_deck
+    input = gets.chomp.to_i until input != 0 
+    # collecting user input is a View method
+    self.my_deck = my_decks[input] || select_deck
+    #my_decks[input - 1] != nil ? self.my_deck = my_decks[input - 1] : select_deck
   end
 
   def deck_method
